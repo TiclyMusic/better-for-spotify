@@ -1,0 +1,651 @@
+/* ==========================================================================
+   Better for Spotify — Material 3 Expressive theme for open.spotify.com
+   Tokens (--md-*) come from ../shared/m3-tokens.css (loaded first). Spotify's
+   class names are build hashes, so hooks are data-testid, ids, ARIA roles and
+   the "encore" design-system classes. Each feature is scoped to an attribute
+   on <html> that main.js toggles.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. Spotify's "Encore" tokens -> M3 roles. Encore re-declares them per
+      "set" (base, bright-accent = green buttons, inverted-light = white ones).
+   --------------------------------------------------------------------------- */
+:root[data-bytm-theme],
+:root[data-bytm-theme] .encore-dark-theme,
+:root[data-bytm-theme] .encore-base-set,
+:root[data-bytm-theme] .encore-dark-theme .encore-base-set {
+  --background-base: var(--md-surface-container-low);
+  --background-highlight: var(--md-surface-container-high);
+  --background-press: var(--md-surface-container-lowest);
+  --background-elevated-base: var(--md-surface-container-high);
+  --background-elevated-highlight: var(--md-surface-container-highest);
+  --background-elevated-press: var(--md-surface-container);
+  --background-tinted-base: color-mix(in oklab, var(--md-on-surface) 9%, transparent);
+  --background-tinted-highlight: color-mix(in oklab, var(--md-on-surface) 14%, transparent);
+  --background-tinted-press: color-mix(in oklab, var(--md-on-surface) 20%, transparent);
+  --text-base: var(--md-on-surface);
+  --text-subdued: var(--md-on-surface-variant);
+  --text-bright-accent: var(--md-primary);
+  --text-positive: var(--md-primary);
+  --text-negative: var(--md-error);
+  --essential-base: var(--md-on-surface);
+  --essential-subdued: var(--md-outline);
+  --essential-bright-accent: var(--md-primary);
+  --essential-positive: var(--md-primary);
+  --essential-negative: var(--md-error);
+  --decorative-base: var(--md-on-surface);
+  --decorative-subdued: var(--md-outline-variant);
+}
+/* Green buttons (play, follow, …) -> M3 filled primary */
+:root[data-bytm-theme] .encore-bright-accent-set,
+:root[data-bytm-theme] .encore-dark-theme .encore-bright-accent-set {
+  --background-base: var(--md-primary);
+  --background-highlight: color-mix(in oklab, var(--md-primary), var(--md-on-primary) 10%);
+  --background-press: color-mix(in oklab, var(--md-primary), var(--md-on-primary) 18%);
+  --text-base: var(--md-on-primary);
+  --text-subdued: var(--md-on-primary);
+  --essential-base: var(--md-on-primary);
+  --decorative-base: var(--md-on-primary);
+}
+/* White buttons (log in, play/pause, …) -> M3 tonal */
+:root[data-bytm-theme] .encore-inverted-light-set,
+:root[data-bytm-theme] .encore-dark-theme .encore-inverted-light-set {
+  --background-base: var(--md-secondary-container);
+  --background-highlight: color-mix(in oklab, var(--md-secondary-container), var(--md-on-secondary-container) 10%);
+  --background-press: color-mix(in oklab, var(--md-secondary-container), var(--md-on-secondary-container) 18%);
+  --text-base: var(--md-on-secondary-container);
+  --text-subdued: var(--md-on-secondary-container);
+  --essential-base: var(--md-on-secondary-container);
+  --decorative-base: var(--md-on-secondary-container);
+}
+:root[data-bytm-theme] {
+  color-scheme: dark;
+  accent-color: var(--md-primary);
+}
+
+/* ---------------------------------------------------------------------------
+   2. Typography — Google Sans Flex instead of Spotify Mix
+   --------------------------------------------------------------------------- */
+/* !important: Spotify adds .spotify-mix-non-latin to <html> for many locales
+   (Italian included) and forces its Mix fonts with !important there. */
+:root[data-bytm-type],
+:root[data-bytm-type] .encore-dark-theme,
+:root[data-bytm-type] body,
+:root[data-bytm-type] [class*="encore-"] {
+  --encore-body-font-stack: "Google Sans Flex", "Google Sans", Roboto, sans-serif !important;
+  --encore-title-font-stack: "Google Sans Flex", "Google Sans", Roboto, sans-serif !important;
+  --encore-variable-font-stack: "Google Sans Flex", "Google Sans", Roboto, sans-serif !important;
+}
+html[data-bytm-type] [data-testid="lyrics-line"] {
+  font-family: "Google Sans Flex", "Google Sans", Roboto, sans-serif !important;
+  font-variation-settings: "ROND" 100, "opsz" 48;
+  letter-spacing: -0.015em;
+}
+html[data-bytm-type] :is(body, button, input, textarea) {
+  font-family: "Google Sans Flex", "Google Sans", Roboto, sans-serif !important;
+}
+html[data-bytm-type] :is(h1, h2, [class*="encore-text-title"], [class*="encore-text-headline"]) {
+  font-family: "Google Sans Flex", "Google Sans", Roboto, sans-serif !important;
+  font-variation-settings: "ROND" 100, "opsz" 48;
+  letter-spacing: -0.015em;
+}
+
+/* ---------------------------------------------------------------------------
+   3. App shell: surface background, M3 panels, focus, selection, scrollbars
+   --------------------------------------------------------------------------- */
+html[data-bytm-theme],
+html[data-bytm-theme] body,
+html[data-bytm-theme] #main,
+html[data-bytm-theme] [data-testid="root"] {
+  background: var(--md-surface-container-lowest) !important;
+}
+html[data-bytm-theme] :is(#Desktop_LeftSidebar_Id, #Desktop_LeftSidebar_Id nav > div, #main-view, #Desktop_PanelContainer_Id, aside[data-testid="NPV_Panel"]) {
+  border-radius: var(--md-shape-xl) !important;
+}
+html[data-bytm-theme] #Desktop_LeftSidebar_Id {
+  background: transparent !important;
+}
+html[data-bytm-theme] ::selection {
+  background: var(--md-primary-container);
+  color: var(--md-on-primary-container);
+}
+html[data-bytm-theme] :focus-visible {
+  outline: 3px solid var(--md-primary) !important;
+  outline-offset: 2px;
+}
+html[data-bytm-theme] .os-scrollbar-handle {
+  background: var(--md-outline-variant) !important;
+  border-radius: var(--md-shape-full) !important;
+}
+html[data-bytm-theme] .os-scrollbar-handle:hover {
+  background: var(--md-outline) !important;
+}
+html[data-bytm-theme] ::-webkit-scrollbar-thumb {
+  background: var(--md-outline-variant) !important;
+  border-radius: var(--md-shape-full) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   4. Top bar: search pill, home button
+   --------------------------------------------------------------------------- */
+html[data-bytm-theme] #global-nav-bar [data-testid="search-input"],
+html[data-bytm-theme] #global-nav-bar form:has([data-testid="search-input"]) {
+  border-radius: var(--md-shape-full) !important;
+}
+html[data-bytm-theme] #global-nav-bar :is(form, div):has(> [data-testid="search-input"]) {
+  background: var(--md-surface-container-high) !important;
+  border-radius: var(--md-shape-full) !important;
+  box-shadow: none !important;
+}
+html[data-bytm-theme] [data-testid="home-button"] {
+  background: var(--md-surface-container-high) !important;
+  transition: border-radius var(--md-spring-fast-dur) var(--md-spring-fast);
+}
+html[data-bytm-theme] [data-testid="home-button"]:active {
+  border-radius: var(--md-shape-md) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   5. Buttons — pills that morph toward rounded squares when pressed
+   --------------------------------------------------------------------------- */
+html[data-bytm-theme] :is([class*="button-primary__inner"], [class*="legacy-button-secondary"], [class*="legacy-button-tertiary"]) {
+  transition:
+    border-radius var(--md-spring-fast-dur) var(--md-spring-fast),
+    background-color var(--md-effects-dur) var(--md-effects),
+    transform var(--md-spring-fast-dur) var(--md-spring-fast) !important;
+}
+html[data-bytm-theme] button:active > [class*="button-primary__inner"],
+html[data-bytm-theme] :is([class*="legacy-button-secondary"], [class*="legacy-button-tertiary"]):active {
+  border-radius: var(--md-shape-md) !important;
+}
+html[data-bytm-theme] [class*="legacy-button-tertiary"]:hover {
+  background: color-mix(in oklab, var(--md-on-surface) 8%, transparent) !important;
+}
+html[data-bytm-theme] [class*="legacy-button-secondary"] {
+  border-color: var(--md-outline-variant) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   6. Cards, play buttons, rows, chips
+   --------------------------------------------------------------------------- */
+/* Albums, playlists, songs: M3 corners that grow on hover. Artists and
+   profiles stay circular (their card is labelled by a spotify:artist/user URI). */
+html[data-bytm-theme] [data-encore-id="card"]:not([aria-labelledby*=":artist:"], [aria-labelledby*=":user:"]) [data-testid="card-image"] {
+  border-radius: var(--md-shape-lg-inc) !important;
+  transition: border-radius var(--md-spring-default-dur) var(--md-spring-default);
+}
+html[data-bytm-theme] [data-encore-id="card"]:not([aria-labelledby*=":artist:"], [aria-labelledby*=":user:"]):hover [data-testid="card-image"] {
+  border-radius: var(--md-shape-xl-inc) !important;
+}
+html[data-bytm-theme] [data-encore-id="card"]:is([aria-labelledby*=":artist:"], [aria-labelledby*=":user:"]) [data-testid="card-image"] {
+  border-radius: 50% !important;
+}
+html[data-bytm-theme] [data-encore-id="card"] {
+  border-radius: var(--md-shape-lg-inc) !important;
+}
+html[data-bytm-theme] [data-testid="play-button"] [class*="button-primary__inner"] {
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.35) !important;
+}
+html[data-bytm-theme] [data-testid="tracklist-row"] {
+  border-radius: var(--md-shape-md) !important;
+}
+html[data-bytm-theme] [data-testid="tracklist-row"][aria-selected="true"] {
+  background: var(--md-secondary-container) !important;
+}
+/* Filter chips (All / Music / Podcasts …) */
+html[data-bytm-theme] button[role="checkbox"] > span {
+  border-radius: var(--md-shape-sm) !important;
+  transition: border-radius var(--md-spring-fast-dur) var(--md-spring-fast), background-color var(--md-effects-dur) var(--md-effects);
+}
+html[data-bytm-theme] button[role="checkbox"]:hover > span {
+  border-radius: var(--md-shape-lg) !important;
+}
+html[data-bytm-theme] button[role="checkbox"][aria-checked="true"] > span {
+  background: var(--md-secondary-container) !important;
+  color: var(--md-on-secondary-container) !important;
+  border-radius: var(--md-shape-lg) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   7. Menus, dialogs, tooltips
+   --------------------------------------------------------------------------- */
+html[data-bytm-theme] :is([role="menu"], #context-menu, [data-testid="context-menu"]) {
+  border-radius: var(--md-shape-lg) !important;
+  padding: 4px !important;
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.4) !important;
+}
+html[data-bytm-theme] [role="menu"] :is([role="menuitem"], [role="menuitem"] > button, [role="menuitemcheckbox"], a[role="menuitem"]) {
+  border-radius: var(--md-shape-md) !important;
+}
+html[data-bytm-theme] [role="dialog"] {
+  border-radius: var(--md-shape-xl) !important;
+}
+html[data-bytm-theme] [role="tooltip"] {
+  border-radius: var(--md-shape-sm) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   8. Now-playing bar: a floating M3 card with a morphing play button
+   --------------------------------------------------------------------------- */
+html[data-bytm-theme] aside[data-testid="now-playing-bar"] {
+  background: var(--md-surface-container-high) !important;
+  border-radius: var(--md-shape-xl) !important;
+  padding-inline: 8px;
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+}
+html[data-bytm-theme] [data-testid="now-playing-bar"] [data-testid="cover-art-image"] {
+  border-radius: var(--md-shape-md) !important;
+}
+html[data-bytm-theme] [data-testid="control-button-playpause"] [class*="button-primary__inner"] {
+  background: var(--md-primary) !important;
+  color: var(--md-on-primary) !important;
+  border-radius: 50% !important;
+  transition:
+    border-radius var(--md-spring-default-dur) var(--md-spring-default),
+    transform var(--md-spring-fast-dur) var(--md-spring-fast) !important;
+}
+html[data-bytm-theme][data-bytm-playing] [data-testid="control-button-playpause"] [class*="button-primary__inner"] {
+  border-radius: var(--md-shape-md) !important;
+}
+html[data-bytm-theme] [data-testid="control-button-playpause"]:active [class*="button-primary__inner"] {
+  transform: scale(0.9);
+}
+html[data-bytm-theme] [data-testid="control-button-playpause"] svg {
+  fill: var(--md-on-primary) !important;
+}
+/* Sliders (progress when the wave is off, volume) */
+html[data-bytm-theme] [data-testid="progress-bar"] {
+  --fg-color: var(--md-primary) !important;
+  --bg-color: var(--md-secondary-container) !important;
+  --progress-bar-radius: 999px !important;
+}
+html[data-bytm-theme] [data-testid="progress-bar-handle"] {
+  background: var(--md-primary) !important;
+}
+
+/* Wavy progress: Spotify's slider stays on top (transparent) for input. */
+html[data-bytm-wavy] [data-testid="now-playing-bar"] [data-testid="playback-progressbar"] {
+  position: relative;
+}
+html[data-bytm-wavy] [data-testid="now-playing-bar"] [data-testid="playback-progressbar"] canvas.bytm-wave {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 24px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+}
+html[data-bytm-wavy] [data-testid="now-playing-bar"] [data-testid="playback-progressbar"] [data-testid="progress-bar-background"],
+html[data-bytm-wavy] [data-testid="now-playing-bar"] [data-testid="playback-progressbar"] [data-testid="progress-bar-background"] * {
+  background: transparent !important;
+}
+html[data-bytm-wavy] [data-testid="now-playing-bar"] [data-testid="playback-progressbar"] [data-testid="progress-bar-handle"] {
+  opacity: 0 !important;
+}
+
+/* ---------------------------------------------------------------------------
+   9. Minimal interface & upsells
+   --------------------------------------------------------------------------- */
+html[data-bytm-minimal] :is(
+  [data-testid="left-sidebar-footer"],
+  [data-testid="left-sidebar-legal-links"],
+  [data-testid="footer-div"],
+  #global-nav-bar a[href*="/download"]
+) {
+  display: none !important;
+}
+html[data-bytm-hide-upsells] :is(
+  [data-bytm-upsell],                 /* tagged by tweaks.js */
+  [data-testid="upgrade-button"],
+  #global-nav-bar a[href*="/premium"],
+  #global-nav-bar button:has(a[href*="/premium"])
+) {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------------------------
+   10. Speed
+   --------------------------------------------------------------------------- */
+/* Encore paints an SVG fractal-noise texture behind the main view; rendering
+   feTurbulence is costly and invisible at 5% opacity. Flat surfaces instead. */
+:root[data-bytm-light],
+:root[data-bytm-light] .encore-dark-theme,
+:root[data-bytm-light] .encore-base-set {
+  --background-noise: none !important;
+}
+html[data-bytm-light] :is(#global-nav-bar, [data-testid="now-playing-bar"], [role="menu"], [role="dialog"]) {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+html[data-bytm-lazy] [data-testid="component-shelf"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 340px;
+}
+
+/* ---------------------------------------------------------------------------
+   11. Volume indicator (scroll over the player bar)
+   --------------------------------------------------------------------------- */
+.bytm-volume-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 120px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  min-width: 180px;
+  border-radius: var(--md-shape-full);
+  background: var(--md-surface-container-highest);
+  color: var(--md-on-surface);
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+  font: 600 14px/1 "Google Sans Flex", Roboto, sans-serif;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transform: translate(-50%, 12px) scale(0.9);
+  pointer-events: none;
+  transition:
+    opacity var(--md-effects-dur) var(--md-effects),
+    transform var(--md-spring-fast-dur) var(--md-spring-fast);
+}
+.bytm-volume-toast.bytm-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.bytm-volume-track {
+  flex: 1;
+  height: 8px;
+  border-radius: var(--md-shape-full);
+  background: var(--md-secondary-container);
+  overflow: hidden;
+}
+.bytm-volume-level {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--md-primary);
+  transition: width var(--md-spring-fast-dur) var(--md-spring-fast);
+}
+.bytm-volume-label {
+  min-width: 3.5em;
+  text-align: end;
+}
+
+/* Muted-ad chip (content/adblock.js) */
+.bytm-ad-chip {
+  position: fixed;
+  left: 50%;
+  bottom: 120px;
+  z-index: 9998;
+  padding: 12px 20px;
+  border-radius: var(--md-shape-full);
+  background: var(--md-tertiary-container);
+  color: var(--md-on-tertiary-container);
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+  font: 600 14px/1 "Google Sans Flex", Roboto, sans-serif;
+  opacity: 0;
+  transform: translate(-50%, 12px) scale(0.9);
+  pointer-events: none;
+  transition:
+    opacity var(--md-effects-dur) var(--md-effects),
+    transform var(--md-spring-fast-dur) var(--md-spring-fast);
+}
+.bytm-ad-chip.bytm-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+
+/* ---------------------------------------------------------------------------
+   12. Synced lyrics (lyrics.js) inside Spotify's Lyrics view. Colors come from
+   Spotify's own --lyrics-color-* (made for the album-colored background).
+   --------------------------------------------------------------------------- */
+.bytm-lyrics {
+  display: none;
+}
+[data-bytm-lyrics-root]:is([data-bytm-lyrics-root="loading"], [data-bytm-lyrics-root="synced"], [data-bytm-lyrics-root="plain"])
+  > :not(.bytm-lyrics):not(:has(button)) {
+  display: none !important;
+}
+[data-bytm-lyrics-root]:is([data-bytm-lyrics-root="loading"], [data-bytm-lyrics-root="synced"], [data-bytm-lyrics-root="plain"])
+  > .bytm-lyrics {
+  display: block;
+}
+.bytm-lyrics {
+  --ly-active: var(--lyrics-color-active, var(--md-on-surface));
+  --ly-inactive: var(--lyrics-color-inactive, color-mix(in oklab, var(--md-on-surface) 45%, transparent));
+  --ly-passed: var(--lyrics-color-passed, color-mix(in oklab, var(--md-on-surface) 70%, transparent));
+  grid-area: 1 / 1 / -1 / -1;
+  /* Scroll inside Spotify's fixed-height panel: its album-colored background
+     stays still while the lines move. */
+  align-self: stretch;
+  justify-self: stretch;
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  padding: 64px max(48px, calc((100% - 1024px) / 2)) 42vh;
+  box-sizing: border-box;
+  /* Soft fade at the edges instead of a hard cut. */
+  mask-image: linear-gradient(to bottom, transparent 0, #000 72px, #000 calc(100% - 96px), transparent 100%);
+  font-family: "Google Sans Flex", "Google Sans", Roboto, sans-serif;
+  font-size: clamp(26px, 2.4vw + 6px, 44px);
+}
+.bytm-lyrics::-webkit-scrollbar {
+  display: none;
+}
+#lyrics-cinema .bytm-lyrics {
+  font-size: clamp(32px, 3.4vw + 8px, 68px);
+  padding-top: 18vh;
+}
+
+/* Song change: the old lines drift up and fade out... */
+.bytm-lyrics :is(.bytm-lyrics-lines, .bytm-lyrics-footer) {
+  transition:
+    opacity 240ms cubic-bezier(0.3, 0, 0.8, 0.15),
+    translate 260ms cubic-bezier(0.3, 0, 0.8, 0.15);
+}
+.bytm-lyrics[data-phase="out"] :is(.bytm-lyrics-lines, .bytm-lyrics-footer) {
+  opacity: 0;
+  translate: 0 -0.9em;
+}
+/* ...and the new ones rise in on a spring, rippling out from the active line. */
+.bytm-lyrics[data-phase="in"] .bytm-line {
+  animation: bytm-line-in 720ms var(--md-spring-default, cubic-bezier(0.2, 0, 0, 1)) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+.bytm-lyrics[data-phase="in"] .bytm-lyrics-footer {
+  animation: bytm-line-in 720ms var(--md-spring-default, ease) 450ms both;
+}
+@keyframes bytm-line-in {
+  from {
+    opacity: 0;
+    translate: 0 1.1em;
+  }
+}
+.bytm-lyrics[data-state="loading"] .bytm-lyrics-loader {
+  animation: bytm-fade-in 260ms ease-out 120ms both;
+}
+@keyframes bytm-fade-in {
+  from {
+    opacity: 0;
+    scale: 0.6;
+  }
+}
+.bytm-lyrics-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12em;
+}
+.bytm-line {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.2em 0.35em;
+  border: 0;
+  border-radius: var(--md-shape-lg-inc, 20px);
+  background: transparent;
+  color: var(--ly-inactive);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.22;
+  font-variation-settings: "ROND" 100, "opsz" 48;
+  letter-spacing: -0.015em;
+  text-align: start;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  transform: scale(0.96);
+  transform-origin: left center;
+  cursor: pointer;
+  transition:
+    color 320ms var(--md-effects, ease),
+    background-color 150ms var(--md-effects, ease),
+    transform var(--md-spring-default-dur, 300ms) var(--md-spring-default, ease);
+}
+.bytm-line.bytm-past {
+  color: var(--ly-passed);
+}
+.bytm-line:hover {
+  color: var(--ly-active);
+  background: color-mix(in oklab, var(--ly-active) 8%, transparent);
+}
+.bytm-line:active {
+  transform: scale(0.94);
+}
+.bytm-line.bytm-active {
+  transform: none;
+  color: var(--ly-active);
+}
+.bytm-line:focus-visible {
+  outline: 3px solid var(--ly-active);
+  outline-offset: -3px;
+}
+
+/* Karaoke: a soft-edged fill sweeps through the letters of each word as it's
+   sung; lyrics.js writes --wp (0..1) per word on the active line only. */
+.bytm-lyrics[data-karaoke] .bytm-line.bytm-active:not(.bytm-interlude) {
+  color: var(--ly-passed);
+}
+.bytm-lyrics[data-karaoke] .bytm-line.bytm-active .bytm-w {
+  background-image: linear-gradient(
+    90deg,
+    var(--ly-active) calc(var(--wp, 0) * 125% - 25%),
+    color-mix(in oklab, var(--ly-active) 45%, transparent) calc(var(--wp, 0) * 125%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Instrumental breaks: three dots that light up as the break progresses. */
+.bytm-interlude {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  height: 0;
+  padding-block: 0;
+  overflow: hidden;
+  cursor: default;
+  transition:
+    height var(--md-spring-default-dur, 300ms) var(--md-spring-default, ease),
+    opacity 320ms var(--md-effects, ease);
+}
+.bytm-interlude:hover {
+  background: none;
+}
+.bytm-interlude.bytm-active {
+  height: 1.4em;
+}
+.bytm-interlude span {
+  width: 0.36em;
+  height: 0.36em;
+  border-radius: 50%;
+  background: var(--ly-active);
+}
+.bytm-interlude span:nth-child(1) { opacity: clamp(0.25, calc(var(--p, 0) * 3), 1); }
+.bytm-interlude span:nth-child(2) { opacity: clamp(0.25, calc((var(--p, 0) - 0.333) * 3), 1); }
+.bytm-interlude span:nth-child(3) { opacity: clamp(0.25, calc((var(--p, 0) - 0.667) * 3), 1); }
+.bytm-interlude.bytm-active span {
+  animation: bytm-breathe 2.2s ease-in-out infinite;
+}
+.bytm-interlude.bytm-active span:nth-child(2) { animation-delay: 0.18s; }
+.bytm-interlude.bytm-active span:nth-child(3) { animation-delay: 0.36s; }
+@keyframes bytm-breathe {
+  50% { transform: scale(1.25); }
+}
+
+/* Unsynced lyrics: calm, readable, not clickable. */
+.bytm-lyrics[data-kind="plain"] .bytm-line {
+  padding-block: 0.05em;
+  font-size: 0.72em;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--ly-active);
+  transform: none;
+  cursor: text;
+  user-select: text;
+}
+.bytm-lyrics[data-kind="plain"] .bytm-line:hover {
+  background: none;
+}
+
+.bytm-lyrics-footer {
+  margin: 1.4em 0.35em 0;
+  color: var(--ly-passed);
+  font-size: 14px;
+}
+.bytm-lyrics-footer a {
+  color: var(--ly-active);
+  font-weight: 600;
+  text-decoration: none;
+}
+.bytm-lyrics-footer a:hover {
+  text-decoration: underline;
+}
+
+/* M3 Expressive loading indicator: a spinning, pulsing cookie. */
+.bytm-lyrics-loader {
+  display: none;
+  justify-content: center;
+  padding-top: 96px;
+}
+.bytm-lyrics[data-state="loading"] .bytm-lyrics-loader {
+  display: flex;
+}
+.bytm-lyrics[data-state="loading"] :is(.bytm-lyrics-lines, .bytm-lyrics-footer) {
+  display: none;
+}
+.bytm-lyrics-loader svg {
+  width: 52px;
+  height: 52px;
+  fill: var(--ly-active);
+  animation: bytm-spin 1.6s linear infinite;
+}
+.bytm-lyrics-loader path {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bytm-pulse 0.8s ease-in-out infinite alternate;
+}
+@keyframes bytm-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes bytm-pulse {
+  from { transform: scale(0.72); }
+  to { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --md-spring-fast: ease;
+    --md-spring-default: ease;
+    --md-spring-fast-dur: 1ms;
+    --md-spring-default-dur: 1ms;
+  }
+  .bytm-interlude.bytm-active span,
+  .bytm-lyrics-loader :is(svg, path),
+  .bytm-lyrics[data-phase="in"] :is(.bytm-line, .bytm-lyrics-footer) {
+    animation: none;
+  }
+}

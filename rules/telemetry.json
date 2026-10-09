@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||ingest.sentry.io^",
+      "initiatorDomains": ["open.spotify.com"],
+      "resourceTypes": ["xmlhttprequest", "ping", "script", "other"]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||googletagmanager.com^",
+      "initiatorDomains": ["open.spotify.com"],
+      "resourceTypes": ["script", "xmlhttprequest", "ping", "image", "sub_frame", "other"]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||google-analytics.com^",
+      "initiatorDomains": ["open.spotify.com"],
+      "resourceTypes": ["script", "xmlhttprequest", "ping", "image", "other"]
+    }
+  },
+  {
+    "id": 4,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||analytics.google.com^",
+      "initiatorDomains": ["open.spotify.com"],
+      "resourceTypes": ["script", "xmlhttprequest", "ping", "image", "other"]
+    }
+  },
+  {
+    "id": 5,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||doubleclick.net^",
+      "initiatorDomains": ["open.spotify.com"],
+      "resourceTypes": ["script", "xmlhttprequest", "ping", "image", "sub_frame", "other"]
+    }
+  }
+]

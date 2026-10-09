@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Better for Spotify</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wdth,wght,ROND@6..144,25..151,1..1000,0..100&display=swap"
+    />
+    <link rel="stylesheet" href="../shared/m3-tokens.css" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <svg class="hero-shape" data-shape="polygon" viewBox="-50 -50 100 100" aria-hidden="true">
+        <g transform="translate(0 4.6)">
+          <path id="hero-cookie" />
+          <circle class="hero-note" r="22" />
+          <path class="hero-waves" stroke-width="5.5" d="M-12.8 -4.7Q0 -12.9 12.8 -4.7" />
+          <path class="hero-waves" stroke-width="4.6" d="M-10.6 2.2Q0 -3.1 10.6 2.2" />
+          <path class="hero-waves" stroke-width="3.85" d="M-8.4 8.6Q0 5.5 8.4 8.6" />
+        </g>
+      </svg>
+      <div class="hero-text">
+        <h1>Better for Spotify</h1>
+        <p id="hero-sub">Material 3 Expressive for the web player</p>
+      </div>
+    </header>
+
+    <section class="palette" aria-label="Current palette">
+      <div class="swatches">
+        <span style="background: var(--md-primary)"></span>
+        <span style="background: var(--md-secondary)"></span>
+        <span style="background: var(--md-tertiary)"></span>
+        <span style="background: var(--md-primary-container)"></span>
+        <span style="background: var(--md-secondary-container)"></span>
+      </div>
+      <p id="palette-label">Palette follows the album art</p>
+    </section>
+
+    <main id="groups"></main>
+
+    <footer>
+      <button id="open-ytm" class="btn-filled" type="button">Open Spotify</button>
+      <p class="fine">Changes apply instantly — no reload needed.</p>
+    </footer>
+
+    <script src="../shared/settings.js"></script>
+    <script src="groups.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

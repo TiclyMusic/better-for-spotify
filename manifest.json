@@ -1,0 +1,59 @@
+{
+  "manifest_version": 3,
+  "name": "Better for Spotify",
+  "version": "1.2.0",
+  "description": "Spotify Web Player in Material 3 Expressive: synced karaoke lyrics, colors from the album art, a wavy progress bar and ad muting.",
+  "minimum_chrome_version": "122",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Better for Spotify",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "permissions": ["storage", "declarativeNetRequest", "offscreen"],
+  "host_permissions": ["https://open.spotify.com/*", "https://lrclib.net/*"],
+  "declarative_net_request": {
+    "rule_resources": [
+      { "id": "telemetry", "enabled": true, "path": "rules/telemetry.json" }
+    ]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/shared/m3-tokens.css", "src/content/theme.css", "src/content/pip.css"],
+      "matches": ["https://open.spotify.com/*"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://open.spotify.com/*"],
+      "run_at": "document_start",
+      "css": ["src/shared/m3-tokens.css", "src/content/theme.css"],
+      "js": [
+        "src/shared/settings.js",
+        "src/shared/color.js",
+        "src/content/wavy.js",
+        "src/content/tweaks.js",
+        "src/content/adblock.js",
+        "src/content/lyrics.js",
+        "src/content/main.js"
+      ]
+    },
+    {
+      "matches": ["https://open.spotify.com/*"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "js": ["src/content/page-bridge.js"]
+    }
+  ]
+}

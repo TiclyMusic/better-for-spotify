@@ -1,0 +1,107 @@
+/* Better for Spotify — the Miniplayer (Document Picture-in-Picture window).
+   Spotify copies only the page's own style sheets into that window, so
+   page-bridge.js injects m3-tokens.css + theme.css + this file there and
+   mirrors <html>'s data-bytm-* attributes and palette onto it. */
+
+/* Album-extracted colors -> the M3 tonal palette. Spotify sets these inline on
+   the player elements, so the override has to target those elements. */
+html[data-bytm-pip][data-bytm-theme],
+html[data-bytm-pip][data-bytm-theme] [style*="--extracted-"] {
+  --extracted-background-color: var(--md-surface-container) !important;
+  --extracted-background-tinted: var(--md-surface-container-high) !important;
+  --extracted-text-base: var(--md-on-surface) !important;
+  --extracted-text-subdued: var(--md-on-surface-variant) !important;
+  --extracted-text-bright-accent: var(--md-primary) !important;
+  --extracted-entity-color: var(--md-primary) !important;
+  --window-header-bg-color: var(--md-surface-container) !important;
+  --background-press: var(--md-surface-container-low) !important;
+  --over-media-set-background-press: color-mix(in oklab, var(--md-surface-container-lowest) 72%, transparent) !important;
+}
+
+html[data-bytm-pip][data-bytm-theme],
+html[data-bytm-pip][data-bytm-theme] body {
+  background: var(--md-surface-container-low) !important;
+  color: var(--md-on-surface);
+}
+
+/* Spotify's dark gradients behind the controls -> flat tonal surfaces. */
+html[data-bytm-pip][data-bytm-theme] [class*="spotify__container--is-web"] [style*="gradient"],
+html[data-bytm-pip][data-bytm-theme] body > div {
+  background-image: none !important;
+}
+
+/* Artwork: M3 large rounded corners. */
+html[data-bytm-pip][data-bytm-theme] img {
+  border-radius: var(--md-shape-lg);
+}
+html[data-bytm-pip][data-bytm-theme] :has(> img) {
+  border-radius: var(--md-shape-lg);
+}
+
+/* Icon buttons: circular state layers with a springy press. */
+html[data-bytm-pip][data-bytm-theme] button {
+  border-radius: var(--md-shape-full) !important;
+  transition:
+    background-color var(--md-effects-dur) var(--md-effects),
+    border-radius var(--md-spring-fast-dur) var(--md-spring-fast),
+    transform var(--md-spring-fast-dur) var(--md-spring-fast) !important;
+}
+html[data-bytm-pip][data-bytm-theme] button:hover {
+  background-color: color-mix(in oklab, var(--md-on-surface) 8%, transparent) !important;
+}
+html[data-bytm-pip][data-bytm-theme] button:active {
+  border-radius: var(--md-shape-md) !important;
+  transform: scale(0.94);
+}
+html[data-bytm-pip][data-bytm-theme] button:focus-visible {
+  outline: 3px solid var(--md-primary);
+  outline-offset: 2px;
+}
+
+/* Play/pause: the big filled button (Encore primary) -> M3 primary, a rounded
+   square while playing and a circle while paused, like the main player. */
+html[data-bytm-pip][data-bytm-theme] button:has([class*="button-primary__inner"]),
+html[data-bytm-pip][data-bytm-theme] [class*="button-primary__inner"] {
+  background-color: var(--md-primary) !important;
+  color: var(--md-on-primary) !important;
+  border-radius: var(--md-shape-full) !important;
+  transition: border-radius var(--md-spring-fast-dur) var(--md-spring-fast) !important;
+}
+html[data-bytm-pip][data-bytm-playing][data-bytm-theme] [class*="button-primary__inner"] {
+  border-radius: var(--md-shape-lg) !important;
+}
+
+/* Bottom-edge progress: a 4px M3 linear indicator with rounded ends. */
+html[data-bytm-pip][data-bytm-theme] [data-testid="miniplayer-edge-progress"] {
+  height: 4px !important;
+  inset-inline: 12px !important;
+  inset-block-end: 6px !important;
+  width: calc(100% - 24px) !important;
+  border-radius: var(--md-shape-full);
+  overflow: hidden;
+}
+html[data-bytm-pip][data-bytm-theme] [data-testid="miniplayer-edge-progress"]::-webkit-progress-bar {
+  background: var(--md-secondary-container) !important;
+  border-radius: var(--md-shape-full);
+}
+html[data-bytm-pip][data-bytm-theme] [data-testid="miniplayer-edge-progress"]::-webkit-progress-value {
+  background: var(--md-primary) !important;
+  border-radius: var(--md-shape-full);
+}
+
+/* Titles in Expressive type. */
+html[data-bytm-pip][data-bytm-type] [data-testid="context-item-info-title"] {
+  font-variation-settings: "ROND" 100, "opsz" 32;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+html[data-bytm-pip][data-bytm-theme] [data-testid="context-item-info-subtitles"] {
+  color: var(--md-on-surface-variant) !important;
+}
+
+/* Range inputs (volume / seek, when shown) follow the M3 slider colors. */
+html[data-bytm-pip][data-bytm-theme] {
+  accent-color: var(--md-primary);
+  --fg-color: var(--md-primary);
+  --bg-color: var(--md-secondary-container);
+}

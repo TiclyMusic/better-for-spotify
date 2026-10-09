@@ -1,0 +1,127 @@
+/* GENERATED from shared/m3-tokens.css by tools/sync-shared.mjs — edit the original. */
+/* ==========================================================================
+   Material 3 Expressive design tokens, shared by Better YT Music (extension,
+   desktop app) and Better for YouTube. The whole tonal scheme is derived in CSS
+   from two numbers: --bytm-hue and --bytm-chroma.
+   Tone -> OKLCH lightness is approximated from CIELAB L* (HCT tone).
+   ========================================================================== */
+
+/* Seed values, set on <html> by color.js (hue in degrees, chroma in OKLCH). */
+@property --bytm-hue {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 285;
+}
+@property --bytm-chroma {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.12;
+}
+
+/* ---------------------------------------------------------------------------
+   1. Tokens: dark M3 scheme derived from the seed in OKLCH.
+   Tone -> OKLCH lightness is approximated from CIELAB L* (HCT tone).
+   --------------------------------------------------------------------------- */
+:root {
+  --_h: var(--bytm-hue);
+  --_c: var(--bytm-chroma);
+  --_n: calc(var(--bytm-chroma) * 0.14); /* neutral chroma (tinted greys) */
+  --_nv: calc(var(--bytm-chroma) * 0.26); /* neutral-variant chroma */
+
+  --md-primary: oklch(0.83 var(--_c) var(--_h));
+  --md-on-primary: oklch(0.31 calc(var(--_c) * 0.8) var(--_h));
+  --md-primary-container: oklch(0.42 calc(var(--_c) * 0.85) var(--_h));
+  --md-on-primary-container: oklch(0.93 calc(var(--_c) * 0.4) var(--_h));
+  --md-inverse-primary: oklch(0.48 var(--_c) var(--_h));
+
+  --md-secondary: oklch(0.83 calc(var(--_c) * 0.36) var(--_h));
+  --md-on-secondary: oklch(0.31 calc(var(--_c) * 0.3) var(--_h));
+  --md-secondary-container: oklch(0.36 calc(var(--_c) * 0.36) var(--_h));
+  --md-on-secondary-container: oklch(0.92 calc(var(--_c) * 0.2) var(--_h));
+
+  --md-tertiary: oklch(0.83 calc(var(--_c) * 0.62) calc(var(--_h) + 60));
+  --md-on-tertiary: oklch(0.31 calc(var(--_c) * 0.5) calc(var(--_h) + 60));
+  --md-tertiary-container: oklch(0.42 calc(var(--_c) * 0.62) calc(var(--_h) + 60));
+  --md-on-tertiary-container: oklch(0.93 calc(var(--_c) * 0.3) calc(var(--_h) + 60));
+
+  --md-error: oklch(0.8 0.11 25);
+  --md-on-error: oklch(0.34 0.12 25);
+  --md-error-container: oklch(0.42 0.14 25);
+  --md-on-error-container: oklch(0.93 0.04 25);
+
+  --md-surface: oklch(0.175 var(--_n) var(--_h));
+  --md-surface-dim: oklch(0.175 var(--_n) var(--_h));
+  --md-surface-bright: oklch(0.345 var(--_n) var(--_h));
+  --md-surface-container-lowest: oklch(0.155 var(--_n) var(--_h));
+  --md-surface-container-low: oklch(0.215 var(--_n) var(--_h));
+  --md-surface-container: oklch(0.235 var(--_n) var(--_h));
+  --md-surface-container-high: oklch(0.28 var(--_n) var(--_h));
+  --md-surface-container-highest: oklch(0.325 var(--_n) var(--_h));
+  --md-on-surface: oklch(0.925 var(--_n) var(--_h));
+  --md-on-surface-variant: oklch(0.83 var(--_nv) var(--_h));
+  --md-outline: oklch(0.66 var(--_nv) var(--_h));
+  --md-outline-variant: oklch(0.4 var(--_nv) var(--_h));
+  --md-inverse-surface: oklch(0.925 var(--_n) var(--_h));
+  --md-inverse-on-surface: oklch(0.31 var(--_n) var(--_h));
+  --md-scrim: oklch(0 0 0 / 0.5);
+
+  /* State layers */
+  --md-hover: 0.08;
+  --md-press: 0.12;
+
+  /* Shape scale (M3 Expressive adds the larger steps) */
+  --md-shape-xs: 4px;
+  --md-shape-sm: 8px;
+  --md-shape-md: 12px;
+  --md-shape-lg: 16px;
+  --md-shape-lg-inc: 20px;
+  --md-shape-xl: 28px;
+  --md-shape-xl-inc: 32px;
+  --md-shape-xxl: 48px;
+  --md-shape-full: 9999px;
+
+  /* Motion: spring curves (damping/stiffness from the M3 Expressive motion
+     scheme) baked into linear() easing. */
+  --md-spring-fast: linear(0, 0.0213, 0.0778, 0.159, 0.2561, 0.3614, 0.4688, 0.5734, 0.6716, 0.7608, 0.8394, 0.9067, 0.9624, 1.0069, 1.041, 1.0657, 1.082, 1.0913, 1.0947, 1.0935, 1.0887, 1.0814, 1.0724, 1.0625, 1.0524, 1.0424, 1.0329, 1.0243, 1.0166, 1.01, 1.0045, 1.0001, 0.9967, 0.9942, 0.9925, 0.9915, 0.9911, 0.9915, 0.9925, 0.9939, 0.9958, 0.9975, 0.9989, 1);
+  --md-spring-default: linear(0, 0.012, 0.044, 0.0908, 0.1478, 0.2114, 0.2786, 0.3472, 0.4151, 0.481, 0.5438, 0.6028, 0.6575, 0.7076, 0.753, 0.7937, 0.8299, 0.8617, 0.8895, 0.9135, 0.934, 0.9513, 0.9658, 0.9778, 0.9876, 0.9954, 1.0015, 1.0062, 1.0097, 1.0122, 1.0138, 1.0148, 1.0151, 1.0147, 1.0132, 1.0113, 1.0092, 1.0072, 1.0055, 1.004, 1);
+  --md-spring-fast-dur: 360ms;
+  --md-spring-default-dur: 500ms;
+  --md-effects: cubic-bezier(0.34, 0.8, 0.34, 1);
+  --md-effects-dur: 200ms;
+}
+
+/* Light scheme (used by YouTube's light theme): [data-bytm-scheme="light"]. */
+:root[data-bytm-scheme="light"] {
+  --md-primary: oklch(0.483 var(--_c) var(--_h));
+  --md-on-primary: oklch(1 0 0);
+  --md-primary-container: oklch(0.925 calc(var(--_c) * 0.45) var(--_h));
+  --md-on-primary-container: oklch(0.31 calc(var(--_c) * 0.8) var(--_h));
+  --md-inverse-primary: oklch(0.83 var(--_c) var(--_h));
+  --md-secondary: oklch(0.483 calc(var(--_c) * 0.36) var(--_h));
+  --md-on-secondary: oklch(1 0 0);
+  --md-secondary-container: oklch(0.925 calc(var(--_c) * 0.3) var(--_h));
+  --md-on-secondary-container: oklch(0.31 calc(var(--_c) * 0.3) var(--_h));
+  --md-tertiary: oklch(0.483 calc(var(--_c) * 0.62) calc(var(--_h) + 60));
+  --md-on-tertiary: oklch(1 0 0);
+  --md-tertiary-container: oklch(0.925 calc(var(--_c) * 0.4) calc(var(--_h) + 60));
+  --md-on-tertiary-container: oklch(0.31 calc(var(--_c) * 0.5) calc(var(--_h) + 60));
+  --md-error: oklch(0.5 0.17 25);
+  --md-on-error: oklch(1 0 0);
+  --md-error-container: oklch(0.925 0.05 25);
+  --md-on-error-container: oklch(0.36 0.12 25);
+  --md-surface: oklch(0.985 var(--_n) var(--_h));
+  --md-surface-dim: oklch(0.9 var(--_n) var(--_h));
+  --md-surface-bright: oklch(0.985 var(--_n) var(--_h));
+  --md-surface-container-lowest: oklch(1 0 0);
+  --md-surface-container-low: oklch(0.97 var(--_n) var(--_h));
+  --md-surface-container: oklch(0.955 var(--_n) var(--_h));
+  --md-surface-container-high: oklch(0.94 var(--_n) var(--_h));
+  --md-surface-container-highest: oklch(0.925 var(--_n) var(--_h));
+  --md-on-surface: oklch(0.224 var(--_n) var(--_h));
+  --md-on-surface-variant: oklch(0.397 var(--_nv) var(--_h));
+  --md-outline: oklch(0.569 var(--_nv) var(--_h));
+  --md-outline-variant: oklch(0.827 var(--_nv) var(--_h));
+  --md-inverse-surface: oklch(0.31 var(--_n) var(--_h));
+  --md-inverse-on-surface: oklch(0.962 var(--_n) var(--_h));
+  --md-scrim: oklch(0 0 0 / 0.32);
+}
