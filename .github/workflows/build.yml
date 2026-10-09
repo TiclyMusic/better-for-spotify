@@ -1,0 +1,36 @@
+name: Build extension
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Package extension
+        id: pkg
+        run: |
+          name="${GITHUB_REPOSITORY#*/}"
+          version=$(jq -r .version manifest.json)
+          zip -r "$name-$version.zip" . -x ".git/*" ".github/*" "*.zip" "README.md"
+          echo "file=$name-$version.zip" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.pkg.outputs.file }}
+          path: ${{ steps.pkg.outputs.file }}
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.pkg.outputs.file }}
+          generate_release_notes: true

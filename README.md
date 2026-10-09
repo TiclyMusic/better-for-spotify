@@ -49,3 +49,12 @@ store/                          Chrome Web Store kit (see store/README.md)
 ```
 
 `src/shared/m3-tokens.css`, `src/shared/color.js`, `src/shared/lyrics-lookup.js` and `src/popup/popup.{js,css}` are generated copies of `../shared/`. Edit the originals there, then run `node tools/sync-shared.mjs` from the `Extensions/` folder.
+
+## Download
+
+Get the latest build from the [Releases page](https://github.com/TiclyMusic/better-for-spotify/releases/latest). Unzip it, open `chrome://extensions`, enable Developer mode and use **Load unpacked**.
+
+## Other extensions
+
+- [Better for YouTube Music](https://github.com/TiclyMusic/better-for-yt-music)
+- [Better for YouTube](https://github.com/TiclyMusic/better-for-youtube)
